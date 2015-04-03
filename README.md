@@ -28,6 +28,25 @@ Inorganic chemical reactions >a.k.a> Chemosynthesis ;
 3. Untar the jcmap assembly
 4. Modify the config/config.properties
 5. Execute the script jcmap or jcmap.bat
+ 
+## Embedded usage
+I will wrap this in a nice API in some time. Till then, you can embed it using the following steps.
+
+```java
+// 1. Convert the JCMap script to the DOT equivalent
+CMapBuilder cmapUtil = new CMapBuilder() ;
+CMapElement cmap = cmapUtil.buildCMapElement( rawCMapScript ) ;
+CMapDotSerializer cmapSerializer = new CMapDotSerializer( cmap ) ;
+String dotFileContent = cmapSerializer.convertCMaptoDot() ;
+
+// 2. Save the DOT contents to a file
+FileUtils.writeStringToFile( dotFile, dotFileContent, "UTF-8" ) ;
+
+// 3. Use the GraphvizAdapter to transform the DOT content to an image.
+//    dotExecPath is the path to the dot executable.
+GraphvizAdapter gvAdapter = new GraphvizAdapter( dotExecPath ) ;
+gvAdapter.generateGraph( dotFile, imgFile ) ;
+````
 
 ## Acknowledgements
 1. Andreas Tetzl - for his ImageMap program (http://www.tetzl.de/jimagemap.html)
