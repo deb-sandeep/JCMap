@@ -1,0 +1,14 @@
+To display the map horizontally
+-------------------------------------------------------------------------------
+@graph{ rankdir=LR; } 
+rankdir has possible values as LR, TB, BT, RL
+
+To display certain nodes in the same rank
+-------------------------------------------------------------------------------
+@rank{ Limestone, Clay };
+Note that this declaration should precede the usage definition of the nodes
+
+Setting the background color of a node/group of nodes
+-------------------------------------------------------------------------------
+{<comma separated node names>}[ fillcolor=<color> ];
+
