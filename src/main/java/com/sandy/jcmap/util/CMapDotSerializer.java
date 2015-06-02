@@ -120,7 +120,7 @@ public class CMapDotSerializer {
         buffer.append( "\n" ) ;
         buffer.append( "node [\n" ) ;
         buffer.append( "    fontcolor = \"blue\" ;\n" ) ;
-        buffer.append( "    fontsize = 11 ;\n" ) ;
+        buffer.append( "    fontsize = 10 ;\n" ) ;
         buffer.append( "    shape = \"plaintext\" ;\n" ) ;
         buffer.append( "    style = \"filled\" ;\n" ) ;
         buffer.append( "    fillcolor = \"transparent\" ;\n" ) ;
@@ -194,7 +194,7 @@ public class CMapDotSerializer {
         buffer.append("subgraph cluster_" + normKey + " {\n") ;
         buffer.append("    label    = " + key + " ;\n") ;
         buffer.append( "   fontname = Calibri" + " ;\n" ) ;
-        buffer.append( "   fontsize = 12" + " ;\n" ) ;
+        buffer.append( "   fontsize = 11" + " ;\n" ) ;
         buffer.append("    color    = sienna1 ;\n") ;
         buffer.append("    penwidth = 0.3 ;\n") ;
         buffer.append("    node [\n") ;
@@ -243,6 +243,12 @@ public class CMapDotSerializer {
                 buffer.append( "fillcolor=\"cyan\" ;" ) ;
                 buffer.append( "fontsize=\"11\" ;" ) ;
                 buffer.append( "color=\"cyan\" ;" ) ;
+                buffer.append( "style=\"filled\" ;" ) ;
+            }
+            else {
+                buffer.append( "fillcolor=\"#e8fffe\" ;" ) ;
+                buffer.append( "fontsize=\"10\" ;" ) ;
+                buffer.append( "color=\"#81fff6\" ;" ) ;
                 buffer.append( "style=\"filled\" ;" ) ;
             }
             for( String k : c.getAttrs().keySet() ) {
