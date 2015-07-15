@@ -3,6 +3,15 @@ To display the map horizontally
 @graph{ rankdir=LR; } 
 rankdir has possible values as LR, TB, BT, RL
 
+@graph{ splines=ortho; }
+splines can have values 
+none
+line
+polyline
+curved
+ortho
+spline
+
 To display certain nodes in the same rank
 -------------------------------------------------------------------------------
 @rank{ Limestone, Clay };
