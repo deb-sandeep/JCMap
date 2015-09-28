@@ -21,3 +21,6 @@ Setting the background color of a node/group of nodes
 -------------------------------------------------------------------------------
 {<comma separated node names>}[ fillcolor=<color> ];
 
+A short id for a concept name
+--------------------------------------------------------------------------------
+a( Raja Rammohun Roy )
