@@ -24,3 +24,7 @@ Setting the background color of a node/group of nodes
 A short id for a concept name
 --------------------------------------------------------------------------------
 a( Raja Rammohun Roy )
+
+Graphviz colors
+--------------------------------------------------------------------------------
+http://www.graphviz.org/doc/info/colors.html
