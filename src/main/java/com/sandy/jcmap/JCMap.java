@@ -64,10 +64,10 @@ public class JCMap extends JFrame implements ActionListener, ClipboardOwner {
     
     private MapRenderWorker worker = null ;
     
-    public JCMap() {
+    public JCMap( boolean showControls ) {
         
         super( "Concept Map Editor" ) ;
-        setUpUI() ;
+        setUpUI( showControls ) ;
         
         ConfigManager cfgMgr = ConfigManager.getInstance() ;
         String workspacePath = cfgMgr.getString( "jcmap.workspace.dir" ) ;
@@ -82,7 +82,7 @@ public class JCMap extends JFrame implements ActionListener, ClipboardOwner {
         worker.start() ;
     }
     
-    private void setUpUI() {
+    private void setUpUI( boolean showControls ) {
         
         Container contentPane = getContentPane() ;
         contentPane.setLayout( new BorderLayout() ) ;
@@ -92,26 +92,15 @@ public class JCMap extends JFrame implements ActionListener, ClipboardOwner {
         JSplitPane splitPane = new JSplitPane( JSplitPane.VERTICAL_SPLIT ) ;
         splitPane.setDividerLocation( 115 ) ;
         splitPane.setOneTouchExpandable( true ) ; 
-        splitPane.add( getTopPanel() ) ;
+        splitPane.add( getTopPanel( showControls ) ) ;
         splitPane.add( mapDisplay ) ;
         splitPane.setDividerSize( 6 ) ;
         splitPane.setContinuousLayout( true ) ;
         
         contentPane.add( splitPane ) ;
-        
-        Dimension screenSz = Toolkit.getDefaultToolkit().getScreenSize() ; 
-        super.setBounds( 0, 0, screenSz.width, screenSz.height ) ;
-        super.addWindowListener( new WindowAdapter() {
-            public void windowClosing( WindowEvent e ) {
-                saveCMap() ;
-                System.exit(-1) ;
-            }
-        });
-        super.setVisible( true ) ;
-        editor.requestFocus() ;
     }
     
-    private JPanel getTopPanel() {
+    private JPanel getTopPanel( boolean showControls ) {
         
         JPanel topPanel = new JPanel( new BorderLayout() ) ;
         
@@ -120,9 +109,11 @@ public class JCMap extends JFrame implements ActionListener, ClipboardOwner {
         panel.add( editor ) ;
         JScrollPane editorSP = new JScrollPane( panel ) ;
         
-        topPanel.add( getToolBarPanel(), BorderLayout.WEST ) ;
+        if( showControls ) {
+            topPanel.add( getToolBarPanel(), BorderLayout.WEST ) ;
+            topPanel.add( getTopRightPanel(), BorderLayout.EAST ) ;
+        }
         topPanel.add( editorSP, BorderLayout.CENTER ) ;
-        topPanel.add( getTopRightPanel(), BorderLayout.EAST ) ;
         
         return topPanel ;
     }
@@ -478,11 +469,26 @@ public class JCMap extends JFrame implements ActionListener, ClipboardOwner {
         }
     }
     
+    public CMapEditorPane getEditor() {
+        return editor ;
+    }
+    
     public static void main( String[] args ) throws Exception {
         ConfigManager cfgMgr = ConfigManager.getInstance() ;
         cfgMgr.initialize() ; 
         
-        new JCMap() ;
+        final JCMap jcMap = new JCMap( true ) ;
+        Dimension screenSz = Toolkit.getDefaultToolkit().getScreenSize() ; 
+        jcMap.setBounds( 0, 0, screenSz.width, screenSz.height ) ;
+        jcMap.setVisible( true ) ;
+        jcMap.editor.requestFocus() ;
+        
+        jcMap.addWindowListener( new WindowAdapter() {
+            public void windowClosing( WindowEvent e ) {
+                jcMap.saveCMap() ;
+                System.exit(-1) ;
+            }
+        });
     }
 
     @Override
