@@ -19,15 +19,6 @@ public class CommandLineExec {
         return builder.toString().trim() ;
     }
 
-    /**
-     * This method is used to execute a command in the command prompt (by
-     * appending the "cmd /c" to the input command. the integrity of the command
-     * is upon the caller. This method DOES NOT spawn a new thread and hence
-     * executes in the calling thread. For execution in separate thread separate
-     * thread refer method executeCommandInThread
-     * 
-     * @param command
-     */
     public static int executeCommand( String[] command ) {
 
         int retVal = -1 ;
